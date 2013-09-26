@@ -1,0 +1,7 @@
+<span ng-show="!admins.length">No admins (use admin:admin)</span>
+<table>
+    <tr ng-repeat="admin in admins" ng-click='selectAdmin(admin.name)'
+        ng-class='{selected: admin.name==selectedAdmin}'>
+        <td>{{admin.name}}</td>
+    </tr>
+</table>
