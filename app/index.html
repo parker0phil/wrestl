@@ -6,11 +6,8 @@
   <link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-  <ul class="menu">
-      <li><a href="#/dash">Dashboard</a></li>
-    <li><a href="#/admin">Admins</a></li>
-    <li><a href="#/client">Clients</a></li>
-    <li><a href="#/provider">Providers</a></li>
+  <ul class="menu" ng-controller='nav'>
+      <li ng-repeat="resource in resources"><a href="#/{{resource.name}}">{{resource.name}}</a></li>
   </ul>
 
   <div ng-view></div>

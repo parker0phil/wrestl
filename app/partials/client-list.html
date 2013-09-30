@@ -1,7 +1,0 @@
-<span ng-show="!clients.length">No clients</span>
-<table>
-    <tr ng-repeat="client in clients" ng-click='selectClient(client.name)'
-        ng-class='{selected: client.name==selectedClient}'>
-        <td>{{client.name}}</td>
-    </tr>
-</table>

@@ -1,0 +1,7 @@
+<span ng-show="!entities.length">No {{resourceName}}s</span>
+<table>
+    <tr ng-repeat="entity in entities" ng-click='selectEntity(entity.name)'
+        ng-class='{selected: entity.name==selectedEntity}'>
+        <td>{{entity.name}}</td>
+    </tr>
+</table>

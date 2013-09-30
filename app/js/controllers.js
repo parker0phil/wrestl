@@ -1,30 +1,25 @@
 'use strict';
 
+
+/* This is the model that will be built dynamically in the future */
+var resources = [{name:'client'},{name:'provider'},{name:'admin'}];
+
 /* Controllers */
-
-function cap(string)
-{
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 var add = angular.module('myApp.controllers', ['myApp.services']);
 
-var entities = ['admin', 'provider','client'];
-
-add.controller('dash', ['$scope', 'repository', function($scope, repository) {
-    for (var entity in entities)(function(entity){
-        repository.getAll(entity).then(function(data){$scope[entity+"s"] = data});
-    })(entities[entity])
+add.controller('nav', ['$scope', function($scope) {
+    $scope["resources"] = resources
 }]);
 
-for (var entity in entities)(function(entity){
-    add.controller(entity, ['$scope', 'repository', function($scope, repository) {
-        $scope[entity+"s"] = repository.getAll(entity);
+add.controller('resource', ['$scope', 'repository', '$routeParams', function($scope, repository, $routeParams) {
+    var resourceName = $routeParams.resourceName;
+    $scope["resourceName"] = resourceName;
+    $scope["entities"] = repository.getAll(resourceName);
 
-        $scope['select'+cap(entity)] = function(entityId){
-            $scope['selected'+cap(entity)] = entityId;
-            $scope[entity] = repository.getOne(entity, entityId)
-        }
-    }])
-})(entities[entity])
+    $scope["selectEntity"] = function(entityId){
+        $scope["selectedEntity"] = entityId;
+        $scope["entity"] = repository.getOne(resourceName, entityId)
+    }
+}]);
+
 
