@@ -1,0 +1,22 @@
+'/foo/{bar}' :
+    GET:
+       when :
+         "Happy Path" :
+            pathparams: {id: 1234}
+            querystring: {}
+            headers: {}
+            then:
+              statusCode : 200
+              headers: {}
+              body : {}
+    POST:
+    PUT:
+       when :
+         "Already exists" :
+            pathparams: {id: ~/1234/}
+            body: {}
+            then:
+              statusCode : CONFLICT
+              headers: {}
+              body : '{"somejsonkey":"somevalue"}'
+    DELETE:
